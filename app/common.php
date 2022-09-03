@@ -78,6 +78,17 @@ function get_all_node()
     return $list;
 }
 
+function get_node_id_by_url(string $url = '')
+{
+    $list = get_all_node();
+    foreach ($list as $value) {
+        if ($value['node_url'] === $url) {
+            return $value['id'];
+        }
+    }
+    return 0;
+}
+
 function get_all_active_node()
 {
     static $list = [];
@@ -95,15 +106,15 @@ function get_all_active_node()
 function get_group_node(int $group_id = 0)
 {
     static $list = [];
-    if (!$list) {
+    if (!isset($list[$group_id])) {
         $result = (new GroupNodeModel())->field('group_id, node_id')->where(['group_id' => $group_id])->select()->toArray();
         if ($result) {
             foreach ($result as $value) {
-                $list[] = $value['node_id'];
+                $list[$group_id][] = $value['node_id'];
             }
         }
     }
-    return $list;
+    return $list[$group_id] ?? [];
 }
 
 function get_all_menu()

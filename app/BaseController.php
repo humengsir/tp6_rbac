@@ -60,7 +60,21 @@ abstract class BaseController
             throw new HttpResponseException(redirect('/login'));
         }
         View::assign('user_info', $this->user_info);
+        $user_all_group = get_all_user_group();
+        $current_group = $user_all_group[$this->user_info['id']] ?? [];
+        $node_list = [];
+        foreach ($current_group as $key => $group_id) {
+            $node_list = array_merge($node_list, get_group_node($group_id));
+        }
+        $this->checkAccess($node_list);//检验用户是否有权限访问该链接
         $sidebar_list = tree_menu(get_all_menu());
+        foreach ($sidebar_list as $key => $value) {
+            foreach ($value as $k => $v) {
+                if ($v['is_nav'] == 0 || !in_array($v['node_id'], $node_list)) {
+                    unset($sidebar_list[$key][$k]);
+                }
+            }
+        }
         foreach ($sidebar_list as $key => $value) {
             if (count($value) < 1) {
                 unset($sidebar_list[$key]);
@@ -109,6 +123,17 @@ abstract class BaseController
     protected function checkLogin()
     {
         return $this->user_info = Session::get('user_info');
+    }
+
+    protected function checkAccess(array $node_list = [])
+    {
+        $access_url = "/" . $this->request->controller(true) . "/" . $this->request->action(true);
+        $access_node_id = get_node_id_by_url($access_url);
+        if ($access_node_id && !in_array($access_node_id, $node_list)) {
+            // 没有权限
+            echo "no access! will return last page after 3 seconds!<script>setTimeout(() => {window.history.back(-1);}, 3000);</script>";
+            exit;
+        }
     }
 
 }
