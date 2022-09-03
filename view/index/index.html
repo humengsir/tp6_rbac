@@ -1,0 +1,23 @@
+{include file="Public/header"}
+        <!-- 以上为左侧菜单栏 sidebar -->
+        <div id="content" class="content">
+            <div class="header">
+                <h1 class="page-title">首页</h1>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="/"> 控制面板 </a> <span class="divider">/</span></li>
+                <li class="active">首页</li>
+                <a title="加入快捷菜单" href="#"><li class="active"><i class="icon-plus" method="add" url=""></i></li></a>
+            </ul>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="block">
+                        <a href="#page-menu" class="block-heading" data-toggle="collapse">快捷菜单</a>
+                        <div id="page-menu" class="block-body collapse in">
+                            <h3>
+                                <span><a href="/user/index"> 用户列表 </a> </span>&nbsp;
+                                <span><a href="/menu/index"> 菜单列表 </a> </span>&nbsp;
+                            </h3>
+                        </div>
+                    </div>
+{include file="Public/footer"}
