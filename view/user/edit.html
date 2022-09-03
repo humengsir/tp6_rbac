@@ -50,7 +50,7 @@
                         $(function(){
                             $("#sub_btn").click(function(){
                                 var data = $('form').serializeArray();
-                                $.post("/user/add", data, function(res){
+                                $.post("/user/edit", data, function(res){
                                     if (res.error_msg != '') {
                                         alert(res.error_msg);
                                     }else{

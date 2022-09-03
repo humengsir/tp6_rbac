@@ -62,6 +62,7 @@ class User extends BaseController
         if ($request->isPost()) {
             // handle for post
             $id = $request->post('id');
+            $group_id = $request->post('group_id');
             $username = $request->post('username');
             $email = $request->post('email');
             $status = (int)$request->post('status');
