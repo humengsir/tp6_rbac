@@ -28,7 +28,7 @@
                                     <label>邮箱</label>
                                     <input type="email" name="email" value="" class="input-xlarge" required="true" />
                                     <label>用户组</label>
-                                    <select name="group_id" class="input-xlarge" id="DropDownTimezone">
+                                    <select name="group_id[]" class="input-xlarge" multiple="multiple" id="DropDownTimezone">
                                         {volist name="group" id="vo"}
                                         <option value="{$key}" class="input-xlarge option">{$vo}</option>
                                         {/volist}

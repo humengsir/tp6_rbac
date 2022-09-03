@@ -29,7 +29,7 @@
                                     <label>邮箱</label>
                                     <input type="email" name="email" value="{$info.email}" class="input-xlarge" required="true" />
                                     <label>用户组</label>
-                                    <select name="group_id" class="input-xlarge">
+                                    <select name="group_id[]" multiple="multiple" class="input-xlarge">
                                         {volist name="group" id="vo"}
                                         <option value="{$key}" {if condition="in_array($key, $info.group_id)"}selected="selected"{/if} class="input-xlarge option">{$vo}</option>
                                         {/volist}

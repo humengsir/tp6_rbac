@@ -66,6 +66,7 @@ abstract class BaseController
         foreach ($current_group as $key => $group_id) {
             $node_list = array_merge($node_list, get_group_node($group_id));
         }
+        $node_list = array_unique($node_list);
         $this->checkAccess($node_list);//检验用户是否有权限访问该链接
         $sidebar_list = tree_menu(get_all_menu());
         foreach ($sidebar_list as $key => $value) {

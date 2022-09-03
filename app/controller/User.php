@@ -40,11 +40,14 @@ class User extends BaseController
             $res = $this->model->save($data);
             if ($res !== false) {
                 // assign group
-                $user_group_data = [
-                    'user_id' => $this->model->id,
-                    'group_id' => $group_id,
-                ];
-                $add_group_result = (new UserGroupModel())->save($user_group_data);
+                $user_group_data = [];
+                foreach ($group_id as $value) {
+                    $user_group_data[] = [
+                        'user_id' =>  $this->model->id,
+                        'group_id' => $value,
+                    ];
+                }
+                $add_group_result = (new UserGroupModel())->insert_many_group($user_group_data);
                 if (!$add_group_result) {
                     return json(['error_msg' => '添加用户所在组失败']);
                 }
@@ -76,11 +79,14 @@ class User extends BaseController
                 // assign group
                 $group_model = new UserGroupModel();
                 $group_model->where(['user_id' => $id])->delete();
-                $user_group_data = [
-                    'user_id' => $id,
-                    'group_id' => $group_id,
-                ];
-                $add_group_result = $group_model->save($user_group_data);
+                $user_group_data = [];
+                foreach ($group_id as $value) {
+                    $user_group_data[] = [
+                        'user_id' => $id,
+                        'group_id' => $value,
+                    ];
+                }
+                $add_group_result = $group_model->insert_many_group($user_group_data);
                 if ($add_group_result === false) {
                     return json(['error_msg' => '更新用户所在组失败']);
                 }
