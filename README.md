@@ -54,3 +54,11 @@ All rights reserved。
 ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
 
 更多细节参阅 [LICENSE.txt](LICENSE.txt)
+
+
+关于我们的项目介绍
+rbac的权限控制的部署
+* 要创建一个rbac的数据库(使用rbac.sql)
+* 建立.env文件 类似于.env.example
+* 下载完毕后执行 composer install 来生成 vendor 文件夹(因为我们的git自动忽略了这样的文件夹)
+
